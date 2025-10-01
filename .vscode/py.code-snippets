@@ -1,0 +1,10 @@
+{
+    "Print to console": {
+        "prefix": "tmp",
+        "body": [
+            "import sys",
+            "input = sys.stdin.readline"
+        ],
+        "description": "テンプレート"
+    },
+}
