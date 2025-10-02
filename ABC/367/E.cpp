@@ -140,8 +140,25 @@ ___(__ﾆつ/   FMV   / .| .|________
            ｶﾞｶﾞｶﾞｶﾞ・・・・
 --------------------------------------------------------
 */
+//解説AC
 void Main () {
-    int n,t,a;cin>>n>>t>>a;
-    n/=2;
-    YesNo(t>n||a>n);
+    ll N,K; cin>>N>>K;
+    vi X(N); cin>>X;
+    vi A(N); cin>>A;
+    if(K==0)priturn(A);
+    for(auto& i:X)i--;
+    ll logK = 1;
+    while((1LL << logK) <= K) logK++;
+    vvi doubling(logK,vi(N));
+    rep(i,N) doubling[0][i] = X[i];
+    rep(k,logK-1)rep(i,N)doubling[k+1][i] = doubling[k][doubling[k][i]];
+    rep(i,N){
+        ll now = i;
+        ll K_ = K;
+        for(ll k = 0; K_ > 0;k++){
+            if(K_&1) now = doubling[k][now];
+            K_ = K_>>1;
+        }
+        cout<<A[now]<<" \n"[i==N-1];
+    }
 }

@@ -141,7 +141,26 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    int n,t,a;cin>>n>>t>>a;
-    n/=2;
-    YesNo(t>n||a>n);
+    ll N,M; cin>>N>>M;
+    vll A(N);
+    ll sum = 0;
+    rep(i,N){
+        ll a; cin>>a;
+        sum+=a%M;
+        sum%=M;
+        A[i] = a%M;
+    }
+    ll hoge=0;
+    ll ans = 0;
+    vll v(M,0);
+    rep(i,N){
+        hoge+=A[i];
+        hoge%=M;
+        ans+=v[hoge];
+        //if(hoge==0)ans++;
+        ans+=v[(hoge-sum+M)%M];
+        v[hoge]++;
+    }
+    debug(v);
+    print(ans);
 }

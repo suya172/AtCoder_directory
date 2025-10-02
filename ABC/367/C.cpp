@@ -140,8 +140,24 @@ ___(__ﾆつ/   FMV   / .| .|________
            ｶﾞｶﾞｶﾞｶﾞ・・・・
 --------------------------------------------------------
 */
+ll N,K;
+vll R;
+void f(ll idx,vll v,ll sum){
+    if(idx==N){
+        if(sum%K==0) print(v);
+        return;
+    }
+    rrep(i,R[idx]){
+        vll vv = v;
+        vv.pb(i);
+        f(idx+1,vv,sum+i);
+    }
+}
 void Main () {
-    int n,t,a;cin>>n>>t>>a;
-    n/=2;
-    YesNo(t>n||a>n);
+   cin>>N>>K;
+   rep(i,N){
+    ll r; cin>>r;
+    R.pb(r);
+   }
+   f(0,{},0);
 }

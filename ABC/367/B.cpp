@@ -141,7 +141,18 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    int n,t,a;cin>>n>>t>>a;
-    n/=2;
-    YesNo(t>n||a>n);
+    string s;cin>>s;
+    ll hoge;
+    repd(i,s.size()){
+        if(s[i]=='.'){
+            hoge=i;
+            break;
+        }
+        if(s[i]!='0'){
+            hoge = i+1;
+            break;
+        }
+    }
+    rep(i,hoge)cout<<s[i];
+    cout<<'\n';
 }
