@@ -57,8 +57,6 @@ using uss = unordered_set<string>;
 #define SORT(v) sort(all(v));
 #define REV(v) reverse(all(v));
 #define SIZ(v) int(v.size());
-#define DEC(v) for(auto& i:v){i--;}
-#define INC(v) for(auto& i:v){i++;}
 #define pf push_front
 #define pb push_back
 #define ef emplace_front
@@ -132,18 +130,36 @@ template <typename T> inline void print(const T& a){cout << a << '\n';return;}
 #define priturn(i) {print(i);return;}
 /*
 OK、ACゲット。
-				  ∧＿∧
-	   ∧＿∧   （´<_`   ）  流石だよな俺ら。
-	  （  ´_ゝ`）  /     ⌒i
-	 ／      ＼         |  |
+                  ∧＿∧
+       ∧＿∧   （´<_`   ）  流石だよな俺ら。
+      （  ´_ゝ`）  /     ⌒i
+     ／      ＼         |  |
 ____/       /￣￣￣￣/  |
 ___(__ﾆつ/   FMV   / .| .|________
-	   ＼/_______/  （u  ⊃
-		   ｶﾞｶﾞｶﾞｶﾞ・・・・
+       ＼/_______/  （u  ⊃
+           ｶﾞｶﾞｶﾞｶﾞ・・・・
 --------------------------------------------------------
 */
 void Main () {
-   vll P = {1,2,3,4,5,6};
-   DEC(P);
-   print(P);
+    ll X,K,D;cin>>X>>K>>D;
+    if(X<0)X*=-1;
+    if(K%2){
+        K--;
+        X-=D;
+        if(X<0)X*=-1;
+    }
+    K/=2;
+    D*=2;
+    debug(K);
+    debug(D);
+    if(K>=(X/D+1)){
+        debug(1);
+        print(min(abs(X-(X/D+1)*D),abs(X-(X/D)*D)));
+    }else if(K>=(X/D)){
+        debug(2);
+        print(abs(X-(X/D)*D));
+    }else{
+        debug(3);
+        print(X-K*D);
+    }
 }

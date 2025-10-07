@@ -57,8 +57,6 @@ using uss = unordered_set<string>;
 #define SORT(v) sort(all(v));
 #define REV(v) reverse(all(v));
 #define SIZ(v) int(v.size());
-#define DEC(v) for(auto& i:v){i--;}
-#define INC(v) for(auto& i:v){i++;}
 #define pf push_front
 #define pb push_back
 #define ef emplace_front
@@ -132,18 +130,23 @@ template <typename T> inline void print(const T& a){cout << a << '\n';return;}
 #define priturn(i) {print(i);return;}
 /*
 OK、ACゲット。
-				  ∧＿∧
-	   ∧＿∧   （´<_`   ）  流石だよな俺ら。
-	  （  ´_ゝ`）  /     ⌒i
-	 ／      ＼         |  |
+                  ∧＿∧
+       ∧＿∧   （´<_`   ）  流石だよな俺ら。
+      （  ´_ゝ`）  /     ⌒i
+     ／      ＼         |  |
 ____/       /￣￣￣￣/  |
 ___(__ﾆつ/   FMV   / .| .|________
-	   ＼/_______/  （u  ⊃
-		   ｶﾞｶﾞｶﾞｶﾞ・・・・
+       ＼/_______/  （u  ⊃
+           ｶﾞｶﾞｶﾞｶﾞ・・・・
 --------------------------------------------------------
 */
 void Main () {
-   vll P = {1,2,3,4,5,6};
-   DEC(P);
-   print(P);
+    string S; cin>>S;
+    if(S=="SRR")priturn(2);
+    if(S=="SSR")priturn(1);
+    if(S=="SRS")priturn(1);
+    rep(i,3){
+        if(S[i]!='R')priturn(i);
+    }  
+    priturn(3);
 }

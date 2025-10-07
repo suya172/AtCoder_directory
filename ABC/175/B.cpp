@@ -57,8 +57,6 @@ using uss = unordered_set<string>;
 #define SORT(v) sort(all(v));
 #define REV(v) reverse(all(v));
 #define SIZ(v) int(v.size());
-#define DEC(v) for(auto& i:v){i--;}
-#define INC(v) for(auto& i:v){i++;}
 #define pf push_front
 #define pb push_back
 #define ef emplace_front
@@ -132,18 +130,24 @@ template <typename T> inline void print(const T& a){cout << a << '\n';return;}
 #define priturn(i) {print(i);return;}
 /*
 OK、ACゲット。
-				  ∧＿∧
-	   ∧＿∧   （´<_`   ）  流石だよな俺ら。
-	  （  ´_ゝ`）  /     ⌒i
-	 ／      ＼         |  |
+                  ∧＿∧
+       ∧＿∧   （´<_`   ）  流石だよな俺ら。
+      （  ´_ゝ`）  /     ⌒i
+     ／      ＼         |  |
 ____/       /￣￣￣￣/  |
 ___(__ﾆつ/   FMV   / .| .|________
-	   ＼/_______/  （u  ⊃
-		   ｶﾞｶﾞｶﾞｶﾞ・・・・
+       ＼/_______/  （u  ⊃
+           ｶﾞｶﾞｶﾞｶﾞ・・・・
 --------------------------------------------------------
 */
 void Main () {
-   vll P = {1,2,3,4,5,6};
-   DEC(P);
-   print(P);
+    ll N; cin>>N;
+    vll L(N); cin>>L;
+    ll ans = 0;
+    rep(i,N)reps(j,i+1,N)reps(k,j+1,N){
+        vll v = {L[i],L[j],L[k]};
+        SORT(v);
+        if(v[0]!=v[1]&&v[1]!=v[2]&&v[2]!=v[0]&&v[2]<v[0]+v[1])ans++;
+    }
+    print(ans);
 }

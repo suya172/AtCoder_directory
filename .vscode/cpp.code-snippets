@@ -61,6 +61,8 @@
         "#define SORT(v) sort(all(v));",
         "#define REV(v) reverse(all(v));",
         "#define SIZ(v) int(v.size());",
+        "#define DEC(v) for(auto& i:v){i--;}",
+        "#define INC(v) for(auto& i:v){i++;}",
         "#define pf push_front",
         "#define pb push_back",
         "#define ef emplace_front",

@@ -57,8 +57,6 @@ using uss = unordered_set<string>;
 #define SORT(v) sort(all(v));
 #define REV(v) reverse(all(v));
 #define SIZ(v) int(v.size());
-#define DEC(v) for(auto& i:v){i--;}
-#define INC(v) for(auto& i:v){i++;}
 #define pf push_front
 #define pb push_back
 #define ef emplace_front
@@ -132,18 +130,49 @@ template <typename T> inline void print(const T& a){cout << a << '\n';return;}
 #define priturn(i) {print(i);return;}
 /*
 OK、ACゲット。
-				  ∧＿∧
-	   ∧＿∧   （´<_`   ）  流石だよな俺ら。
-	  （  ´_ゝ`）  /     ⌒i
-	 ／      ＼         |  |
+                  ∧＿∧
+       ∧＿∧   （´<_`   ）  流石だよな俺ら。
+      （  ´_ゝ`）  /     ⌒i
+     ／      ＼         |  |
 ____/       /￣￣￣￣/  |
 ___(__ﾆつ/   FMV   / .| .|________
-	   ＼/_______/  （u  ⊃
-		   ｶﾞｶﾞｶﾞｶﾞ・・・・
+       ＼/_______/  （u  ⊃
+           ｶﾞｶﾞｶﾞｶﾞ・・・・
 --------------------------------------------------------
 */
 void Main () {
-   vll P = {1,2,3,4,5,6};
-   DEC(P);
-   print(P);
+    int N,K; cin>>N>>K;
+    vi P(N); cin>>P;
+    for(auto& i:P)i--;
+    vi C(N); cin>>C;
+    scc_graph graph(N);
+    rep(i,N)graph.add_edge(i,P[i]);
+    vvi V = graph.scc();
+    ll ans = -1e18;
+    debug(V);
+    for(vi& v:V){
+        ll sum = 0;
+        for(int& i:v)sum+=C[i];
+        ll siz = v.size();
+        rep(i,siz){
+            ll c = v[i];
+            debug(v[i]);
+            ll cnt = 0;
+            ll path = 0;
+            while(true){
+                cnt++;
+                path+=C[c];
+                if(cnt>K)break;
+
+                ll num = (K-cnt)/siz;
+                ll score = path + max(0LL,sum) * num;
+                debug(score);
+                chmax(ans,score);
+
+                c=P[c];
+                if(c==v[i])break;
+            }
+        }
+    }
+    print(ans);
 }
