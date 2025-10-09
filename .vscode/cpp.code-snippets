@@ -61,6 +61,7 @@
         "#define MIN(v) *min_element(all(v))",
         "#define MAX(v) *max_element(all(v))",
         "#define SORT(v) sort(all(v));",
+        "#define RSORT(v) sort(rall(v));",
         "#define REV(v) reverse(all(v));",
         "#define SIZ(v) int(v.size());",
         "#define DEC(v) for(auto& i:v){i--;}",
