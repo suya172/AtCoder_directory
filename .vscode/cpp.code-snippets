@@ -46,6 +46,8 @@
         "using usi = unordered_set<int>;",
         "using usll = unordered_set<ll>;",
         "using uss = unordered_set<string>;",
+        "template<class T>",
+        "using min_priority_queue = priority_queue<T, vector<T>, greater<T>>;",
         "",
         "#define pb push_back",
         "#define mp make_pair",
