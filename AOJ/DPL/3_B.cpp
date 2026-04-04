@@ -146,7 +146,40 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    int x = 1;
-    x = ++x;
-    print(x);
+    ll H,W; cin>>H>>W;
+    vvll c(H,vll(W));
+    for(auto& v:c)cin>>v;
+    vvll vy(H,vll(W+1,0));
+    rep(i,H)rep(j,W){
+        if(c[i][j]==1)continue;
+        vy[i][j] = 1;
+        if(i>0) vy[i][j] += vy[i-1][j];
+    }
+    debug(vy);
+    ll ans = 0;
+    rep(i,H){
+        stack<pll> st;
+        rep(j,W+1){
+            ll& rect = vy[i][j]; 
+            if(st.empty()){
+                st.push(mp(rect,j));
+                continue;
+            }else{
+                if(rect>st.top().first){
+                    st.push(mp(rect,j));
+                    continue;
+                }
+                if(rect==st.top().first)continue;
+                ll target = j;
+                while(!st.empty()&&(st.top().first>=rect)){
+                    chmax(ans,st.top().first*(j-st.top().second));
+                    target = st.top().second;
+                    st.pop();
+                }
+                debug(ans);
+                st.push(mp(rect,target));
+            }
+        }
+    }
+    print(ans);
 }

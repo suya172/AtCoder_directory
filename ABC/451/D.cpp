@@ -145,8 +145,41 @@ ___(__ﾆつ/   FMV   / .| .|________
            ｶﾞｶﾞｶﾞｶﾞ・・・・
 --------------------------------------------------------
 */
+ll powten(ll n){
+    ll res = 1;
+    rep(i,n)res*=10;
+    return res;
+}
 void Main () {
-    int x = 1;
-    x = ++x;
-    print(x);
+    vector<set<ll>> V(10);
+    ll hoge = 1;
+    while(hoge<=1e9){
+        ll hogehoge=hoge;
+        ll cnt = 0;
+        while((hogehoge/=10)>0)cnt++;
+        V[cnt+1].insert(hoge);
+        hoge*=2;
+    }
+    rrep(i,8){
+        rrep(j,i){
+            for(ll a:V[j]){
+                for(ll b:V[i+1-j]){
+                    V[i+1].insert(a*powten(i+1-j)+b);
+                }
+            }
+        }
+    }
+    ll i = 1;
+    ll cnt = 0;
+    ll N; cin>>N;
+    while(i<=9){
+        for(ll j:V[i]){
+            cnt++;
+            if(cnt==N){
+                print(j);
+                return;
+            }
+        }
+        i++;
+    }
 }

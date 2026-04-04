@@ -146,7 +146,52 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    int x = 1;
-    x = ++x;
-    print(x);
+    ll N; cin>>N;
+    vvll dist(N,vll(N,0));
+    rep(i,N-1)reps(j,i+1,N){
+        ll A; cin>>A;
+        dist[i][j]=A;
+        dist[j][i]=A;
+    }
+    vvll G(N);
+    rep(i,N)reps(j,i+1,N){
+        bool flag = true;
+        rep(k,N){
+            if((k==i)||(k==j))continue;
+            if(dist[i][k]+dist[j][k]<=dist[i][j]){
+                flag = false;
+                break;
+            }
+        }
+        if(flag){
+            G[i].pb(j);
+            G[j].pb(i);
+        }
+    }
+    debug(G);
+    rep(i,N){
+        stack<ll> st;
+        st.push(i);
+        vll d(N,-1);
+        d[i]=0;
+        while(!st.empty()){
+            ll now = st.top();
+            st.pop();
+            ll nd = d[now];
+            for(ll& next:G[now]){
+                if(d[next]>-1)continue;
+                d[next]=nd+dist[now][next];
+                st.push(next);
+            }
+        }
+        rep(j,N){
+            if(dist[i][j]!=d[j]){
+                debug(i);
+                debug(d);
+                print("No");
+                return;
+            }
+        }
+    }
+    print("Yes");
 }

@@ -145,8 +145,31 @@ ___(__ﾆつ/   FMV   / .| .|________
            ｶﾞｶﾞｶﾞｶﾞ・・・・
 --------------------------------------------------------
 */
+//https://drken1215.hatenablog.com/entry/2024/05/19/011051
 void Main () {
-    int x = 1;
-    x = ++x;
-    print(x);
+    int N; cin>>N;
+    vi A(N),B(N);
+    rep(i,N)cin>>A[i]>>B[i];
+    vi dp(1<<N,-1);
+    auto rec = [&](auto rec,int bit) -> int{
+        if(dp[bit]!=-1)return dp[bit];
+        //終端条件
+        if(__builtin_popcount(bit)<2)return dp[bit] = 0;
+        
+        int res = 0;
+        rep(x,N){
+            if(!(bit&(1<<x)))continue;
+            rep(y,N){
+                if(x==y)continue;
+                if(!(bit&(1<<y)))continue;
+                if(!(A[x]==A[y]||B[x]==B[y]))continue;
+
+                int nbit = bit^(1<<x)^(1<<y);
+                if(!rec(rec,nbit)) res = 1;
+            }
+        }
+        return dp[bit]=res;
+    };
+    int res = rec(rec,(1<<N)-1);
+    print(res==1?"Takahashi":"Aoki");
 }

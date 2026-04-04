@@ -133,6 +133,36 @@ template <class T, class Container, class Compare>
 ostream &operator<<(ostream &os, priority_queue<T, Container, Compare> pq) { while (pq.size()) {os << pq.top() << " ";pq.pop();}return os;}
 template <typename T> inline void print(const T& a){cout << a << '\n';return;}
 #define priturn(i) {print(i);return;}
+// N < 2^64, K <= 64
+uint64_t kth_root(uint64_t N, uint64_t K) {
+    assert(K >= 1);
+    if (N <= 1 || K == 1) return N;
+    if (K >= 64) return 1;
+    if (N == uint64_t(-1)) --N;
+    
+    auto mul = [&](uint64_t x, uint64_t y) -> uint64_t {
+        if (x < UINT_MAX && y < UINT_MAX) return x * y;
+        if (x == uint64_t(-1) || y == uint64_t(-1)) return uint64_t(-1);
+        return (x <= uint64_t(-1) / y ? x * y : uint64_t(-1));
+    };
+    auto power = [&](uint64_t x, uint64_t k) -> uint64_t {
+        if (k == 0) return 1ULL;
+        uint64_t res = 1ULL;
+        while (k) {
+            if (k & 1) res = mul(res, x);
+            x = mul(x, x);
+            k >>= 1;
+        }
+        return res;
+    };
+    
+    uint64_t res;
+    if (K == 2) res = sqrtl(N) - 1;
+    else if (K == 3) res = cbrt(N) - 1;
+    else res = pow(N, nextafter(1 / double(K), 0));
+    while (power(res + 1, K) <= N) ++res;
+    return res;
+}
 /*
 OK、ACゲット。
                   ∧＿∧
@@ -146,7 +176,20 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    int x = 1;
-    x = ++x;
-    print(x);
+    ll N; cin>>N;
+    ll b = 17;
+    vll B = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59};
+    ll ans = 0;
+    for(int bit = 1;bit<(1<<b);++bit){
+        ll K = 1;
+        rep(i,b){
+            if(bit&(1<<i)){
+                K*=B[i];
+                if(K>60)break;
+            }
+        }
+        if(__builtin_popcount(bit)%2==1)ans+=kth_root(N,K);
+        else ans-=kth_root(N,K);
+    }
+    print(ans);
 }

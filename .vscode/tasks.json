@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "cppbuild",
+            "label": "build atcoder c++20",
             "type": "shell",
             "options": {
                 "cwd": "${fileDirname}"

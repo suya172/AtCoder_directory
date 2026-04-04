@@ -146,7 +146,34 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    int x = 1;
-    x = ++x;
-    print(x);
+    ll N; cin>>N;
+    string S; cin>>S;
+    vll cnt(26,0);
+    rep(i,N) cnt[S[i]-'a']++;
+    ll l=0,r=N-1;
+    while((r-l)>=1){
+        ll k = 0;
+        while(cnt[k]==0&&k<(S[l]-'a'))k++;
+        if(k==(S[l]-'a')){
+            cnt[S[l]-'a']--;
+            l++;
+            continue;
+        }
+        ll p = r;
+        while((S[p]-'a')!=k&&p>l){
+            cnt[S[p]-'a']--;
+            p--;
+        }
+        r=p;
+        swap(S[l],S[r]);
+        cnt[S[l]-'a']--;
+        cnt[S[r]-'a']--;
+        l++;
+        r--;
+        debug(mp(l,r));
+        debug(cnt);
+        debug(S);
+        debug("---------------------------");
+    }
+    print(S);
 }

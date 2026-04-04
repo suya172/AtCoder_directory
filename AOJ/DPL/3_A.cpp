@@ -146,7 +146,23 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    int x = 1;
-    x = ++x;
-    print(x);
+    ll H,W; cin>>H>>W;
+    vvll c(H,vll(W)),vx(H,vll(W,0)),vy(H,vll(W,0));
+    for(auto& v:c)cin>>v;
+    rep(i,H)rep(j,W){
+        c[i][j]=!c[i][j];
+        if(c[i][j]==0)continue;
+        vx[i][j]=1;
+        vy[i][j]=1;
+        if(i>0)vy[i][j]+=vy[i-1][j];
+        if(j>0)vx[i][j]+=vx[i][j-1];
+    }
+    debug(vx);
+    debug(vy);
+    ll ans = -1;
+    reps(i,1,H)reps(j,1,W){
+        c[i][j] = min(min(vx[i][j],vy[i][j]),c[i-1][j-1]+1);
+    }
+    rep(i,H)rep(j,W)chmax(ans,c[i][j]);
+    print(ans*ans);
 }

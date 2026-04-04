@@ -146,7 +146,15 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    int x = 1;
-    x = ++x;
-    print(x);
+    min_priority_queue<ll> que;
+    ll Q; cin>>Q;
+    rep(i,Q){
+        ll t,h; cin>>t>>h;
+        if(t==1){
+            que.push(h);
+        }else{
+            while(!que.empty()&&(que.top()<=h)) que.pop();
+        }
+        print(que.size());
+    }
 }
