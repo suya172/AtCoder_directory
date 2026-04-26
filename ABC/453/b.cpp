@@ -146,8 +146,14 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    string memo[2];
-    memo[1] = "";
-    debug(memo[0].empty());
-    debug(memo[1].empty());
-}
+    ll T,X;  cin>>T>>X;  
+    vll A(T+1);cin>>A;
+    vll a = {0}, ns = {A[0]};
+    reps(i,1,T+1){
+        if(abs(ns[ns.size()-1]-A[i])>=X){
+            a.pb(i);
+            ns.pb(A[i]);
+        }
+    }
+    rep(i,a.size())cout<<a[i]<<' '<<ns[i]<<'\n';
+}   

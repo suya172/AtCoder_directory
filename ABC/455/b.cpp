@@ -146,8 +146,20 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    string memo[2];
-    memo[1] = "";
-    debug(memo[0].empty());
-    debug(memo[1].empty());
+    ll H,W; cin>>H>>W;
+    vs S(H);cin>>S;
+    ll ans =0;
+    debug(S);
+    rep(x1,H)reps(x2,x1,H)rep(y1,W)reps(y2,y1,W){
+        bool flag = true;
+        reps(i,x1,x2+1)reps(j,y1,y2+1){
+            if(S[x2-(i-x1)][y2-(j-y1)]!=S[i][j]){
+                flag = false;
+                break;
+            }
+        }
+        ans+=flag;
+    }
+    print(ans);
 }
+

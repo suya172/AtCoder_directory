@@ -146,8 +146,23 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    string memo[2];
-    memo[1] = "";
-    debug(memo[0].empty());
-    debug(memo[1].empty());
+    ll N; cin>>N;
+    vll L(N); cin>>L;
+    for(ll& i:L)i*=2;
+    ll ans = -1;
+    rep(tmp,(1<<N)){
+        ll hoge = 1;
+        ll cnt = 0;
+        rep(i,N){
+            if(tmp&(1<<i)){
+                if((hoge<0)&&((hoge+L[i])>0)) cnt++;
+                hoge+=L[i];
+            }else{
+                if((hoge>0)&&((hoge-L[i])<0)) cnt++;
+                hoge-=L[i];
+            }
+        }
+        chmax(ans,cnt);
+    }
+    print(ans);
 }

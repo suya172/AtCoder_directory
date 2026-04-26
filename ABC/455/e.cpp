@@ -146,8 +146,13 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    string memo[2];
-    memo[1] = "";
-    debug(memo[0].empty());
-    debug(memo[1].empty());
+    ll N; cin>>N;
+    string S; cin>>S;
+    vvll cnt(N+1,vll(3,0));
+    rep(i,N){
+        rep(j,3)cnt[i+1][j]=cnt[i][j];
+        cnt[i+1][S[i]-'A']++;
+    }
+    debug(cnt);
+    
 }

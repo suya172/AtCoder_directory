@@ -145,9 +145,66 @@ ___(__ﾆつ/   FMV   / .| .|________
            ｶﾞｶﾞｶﾞｶﾞ・・・・
 --------------------------------------------------------
 */
+ll s_h,s_w;
+ll g_h,g_w;
+ll H,W; 
+vs S;
+map<char,ll> M;
+void dfs(vector<vvb>& seen,string& path,ll h,ll w){
+    seen[M[path[path.size()-1]]][h][w] = true;
+    if((h==g_h)&&(w==g_w)){
+        if(path.size()<=5000000){
+            print("Yes");
+            print(path);
+            exit(0);
+        }
+    }
+    if((h>0)&&(S[h-1][w]!='#')&&(!((path[path.size()-1]=='U')&&(S[h][w]=='x')))&&(!((path[path.size()-1]!='U')&&(S[h][w]=='o')))&&(!seen[0][h-1][w])){
+        path.pb('U');
+        dfs(seen,path,h-1,w);
+        path.pop_back();
+    }
+    if((h<H-1)&&(S[h+1][w]!='#')&&(!((path[path.size()-1]=='D')&&(S[h][w]=='x')))&&(!((path[path.size()-1]!='D')&&(S[h][w]=='o')))&&(!seen[1][h+1][w])){
+        path.pb('D');
+        dfs(seen,path,h+1,w);
+        path.pop_back();
+    }
+    if((w>0)&&(S[h][w-1]!='#')&&(!((path[path.size()-1]=='L')&&(S[h][w]=='x')))&&(!((path[path.size()-1]!='L')&&(S[h][w]=='o')))&&(!seen[2][h][w-1])){
+        path.pb('L');
+        dfs(seen,path,h,w-1);
+        path.pop_back();
+    }
+    if((w<W-1)&&(S[h][w+1]!='#')&&(!((path[path.size()-1]=='R')&&(S[h][w]=='x')))&&(!((path[path.size()-1]!='R')&&(S[h][w]=='o')))&&(!seen[3][h][w+1])){
+        path.pb('R');
+        dfs(seen,path,h,w+1);
+        path.pop_back();
+    }
+    return;
+}
 void Main () {
-    string memo[2];
-    memo[1] = "";
-    debug(memo[0].empty());
-    debug(memo[1].empty());
+    M['U'] = 0;
+    M['D'] = 1;
+    M['L'] = 2;
+    M['R'] = 3;
+    cin>>H>>W;
+    S.assign(H,"");
+    rep(i,H)rep(j,W){
+        char c;cin>>c;
+        if(c=='S'){
+            s_h=i;
+            s_w=j;
+        }
+        if(c=='G'){
+            g_h=i;
+            g_w=j;
+        }
+        S[i].pb(c);
+    }
+    //UDLR
+    vector<vvb> seen(4,vvb(H,vb(W,false)));
+    string path;
+    string ans;
+    rep(i,4)seen[i][s_h][s_w] = true;
+    dfs(seen,path,s_h,s_w);
+    print("No");
 }

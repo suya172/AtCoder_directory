@@ -146,8 +146,21 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    string memo[2];
-    memo[1] = "";
-    debug(memo[0].empty());
-    debug(memo[1].empty());
+    ll N,K; cin>>N>>K;
+    map<ll,ll> M;
+    rep(i,N){
+        ll a; cin>>a;
+        M[a]++;
+    }
+    vll V;
+    ll hoge=0;
+    for(auto p:M){
+        hoge+=p.first*p.second;
+        V.pb(p.first*p.second);
+    }
+    RSORT(V);
+    rep(i,min((ll)V.size(),K)){
+        hoge-=V[i];
+    }
+    print(hoge);
 }

@@ -145,9 +145,15 @@ ___(__ﾆつ/   FMV   / .| .|________
            ｶﾞｶﾞｶﾞｶﾞ・・・・
 --------------------------------------------------------
 */
+
 void Main () {
-    string memo[2];
-    memo[1] = "";
-    debug(memo[0].empty());
-    debug(memo[1].empty());
+    ll N; cin>>N;
+    string S; cin>>S;
+    ll i = 0;
+    while(i<N&&S[i]=='o') i++;
+    while(i<N){
+        cout<<S[i];
+        i++;
+    }    
+    cout<<'\n';
 }

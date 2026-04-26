@@ -146,8 +146,6 @@ ___(__ﾆつ/   FMV   / .| .|________
 --------------------------------------------------------
 */
 void Main () {
-    string memo[2];
-    memo[1] = "";
-    debug(memo[0].empty());
-    debug(memo[1].empty());
+    int a,b,c;cin>>a>>b>>c;
+    YesNo((a!=b)&&(b==c));
 }

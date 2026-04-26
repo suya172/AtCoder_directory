@@ -145,9 +145,33 @@ ___(__ﾆつ/   FMV   / .| .|________
            ｶﾞｶﾞｶﾞｶﾞ・・・・
 --------------------------------------------------------
 */
+
+
 void Main () {
-    string memo[2];
-    memo[1] = "";
-    debug(memo[0].empty());
-    debug(memo[1].empty());
+   ll N,Q; cin>>N>>Q;
+   vll ans(N,0);
+   vll G(N,-1);
+   rep(i,Q){
+    ll c,p; cin>>c>>p;
+    c--;p--;
+    G[c]=p;
+   }
+   debug(G);
+   vll GG(N,-1);
+   rep(i,N){
+    if(G[i]!=-1)GG[G[i]]=i;
+   }
+   debug(GG)
+   rep(i,N){
+    if(G[i]==-1){
+        ll cnt=1;
+        ll j = i;
+        while(GG[j]!=-1){
+            cnt++;
+            j=GG[j];
+        }
+        ans[i]=cnt;
+    }
+   }
+   print(ans);
 }
